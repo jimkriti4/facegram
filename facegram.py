@@ -48,7 +48,7 @@ def close(i):
                   change_profile.destroy()    
 #login ________________________________________________________________________________________________________ 
 def login():
-        #delete line for old password user
+#delete line for old password user
        def dell(i):  
                   l1 = []
                   with open(r"data/profiles.txt", 'r') as fp:
@@ -81,10 +81,10 @@ def login():
                def get():
                        global neme_frog
                        global new_pas
-                       #username
+                       #username_________________
                        name_get=name_forg.get()
                        neme_frog=name_get
-                       #password
+                       #password________________
                        pas_get=new_pas.get()
                        new_pas=pas_get
                        id_true(name_get,new_pas)
@@ -159,29 +159,29 @@ def login():
                global mail_entry
                new_sub= Tk()
                new_sub.geometry("450x450")
-               #label
+               #label______________________________________________________________________________
                text_title=ttk.Label(new_sub,font=('Century 18'),text="ΔΗΜΙΟΥΡΓΙΑ ΛΟΓΑΡΙΑΣΜΟΥ")
                text_neme=ttk.Label(new_sub,font=('Century 12'),text="οναμα ")
                text_ps=ttk.Label(new_sub,font=('Century 12'),text="κωδικος ")
                text_mail=ttk.Label(new_sub,font=('Century 12'),text="mail ")
-               #inpyt
+               #inpyt___________________________________________________________________________________
                name_entry= ttk.Entry(new_sub,font=('Century 12'))
                pas_entry= ttk.Entry(new_sub,font=('Century 12'))
                mail_entry= ttk.Entry(new_sub,font=('Century 12')) 
-               # bytton
+               # bytton_______________________________________________________________________________________
                Enter= ttk.Button(new_sub, text="ολοκληροση", command=lambda:[get_value(),close(4),login(),])
                back=ttk.Button(new_sub, text="αρχικη", command=lambda:[close(4),home()])
-   # input style_______________________________________________________________________________________________________
-               #text_label
+         #input style_______________________________________________________________________________________________________
+               #text_label_____________________
                text_title.place(x = 20,y = 10) 
                text_neme.place(x = 20,y = 50) 
                text_ps.place(x = 20, y = 90)
                text_mail.place(x = 20, y = 120)
-               #entry
+               #entry__________________________
                name_entry.place(x = 90, y = 50)
                pas_entry.place(x = 90, y = 90)
                mail_entry.place(x = 90, y = 120)
-           # button style 
+               #button style_______________________ 
                Enter.place(x = 190, y = 190)
                back.place(x = 100, y = 190)
                new_sub.title("ΔΗΜΙΟΥΡΓΙΑ ΛΟΓΑΡΙΑΣΜΟΥ")
@@ -192,24 +192,24 @@ def login():
                 global pas_entry            
                 register= Tk()
                 register.geometry("450x450")
-                # label
+                # label_____________________________________________________________________________________
                 text_title=ttk.Label(register,font=('Century 20'),text="εισοδος ")
                 text_neme=ttk.Label(register,font=('Century 12'),text="οναμα ")
                 text_ps=ttk.Label(register,font=('Century 12'),text="κωδικος ")
-                # input
+                # input_____________________________________________________________________________________
                 name_entry= ttk.Entry(register,font=('Century 12'))
                 pas_entry= ttk.Entry(register,font=('Century 12'))
-                # button
+                # button_____________________________________________________________________________________
                 Enter= ttk.Button(register, text="Enter", command= check)
                 back= ttk.Button(register, text="home", command=lambda:[close(3),home()])
                 new= ttk.Button(register, text="δημηοθργια λογαριασμο", command= lambda:[close(3),new_sub_()])
-                # input style
+                # input style_____________________
                 text_title.place(x = 150,y = 10) 
                 text_neme.place(x = 20,y = 50) 
                 text_ps.place(x = 20, y = 90) 
                 name_entry.place(x = 90, y = 50)
                 pas_entry.place(x = 90, y = 90)
-                # button style
+                # button style____________________
                 new.place(x = 300, y = 10) 
                 Enter.place(x = 190, y = 150)
                 back.place(x = 100, y = 150)
@@ -217,7 +217,7 @@ def login():
                 register.mainloop() 
        close(1)     
        login()                                            
-# παιζει μουσικη_________________________________________________________________________________________
+#_play music_________________________________________________________________________________________
 music=[ ]
 def music_play ():
        def music_list():
@@ -299,7 +299,7 @@ def music_play ():
               root.mainloop()             
        music_()
 def facegram(user):
-#delete line for old password user
+#delete line for old password user____________________________________________________________________________________
        def dell(i):  
                   l1 = []
                   with open(r"data/profiles.txt", 'r') as fp:
@@ -318,7 +318,7 @@ def facegram(user):
                        def get_change():
                                global name
                                global password
-                               global maill
+                               global mail
                                name=name_change.get()
                                password=pas_change.get()
                                mail=mail_change.get()
@@ -326,7 +326,7 @@ def facegram(user):
                              get_change()
                              global name
                              global password
-                             global maill
+                             global mail
                              f=open("data/profiles.txt","r")
                              a=0
                              for i in f:
@@ -371,16 +371,16 @@ def facegram(user):
                prof= Tk()
                prof.geometry("450x450")
                data=data_user(user)
-               #button__________
+               #button_______________________________________________________________________________________________
                button_change=ttk.Button(prof,text="αλαγη στα στοιχια σου",command=lambda:[close(7),data_change(data[0])])                                 
-               #text________
+               #text________________________________________________________
                name=ttk.Label(prof,font=('Century 15'),text="ονομα")
                name_=ttk.Label(prof,font=('Century 15'),text=data[0])
                pas=ttk.Label(prof,font=('Century 15'),text="κωδικος")
                pas_=ttk.Label(prof,font=('Century 15'),text=data[1])
                mail=ttk.Label(prof,font=('Century 15'),text="mail")
                mail_=ttk.Label(prof,font=('Century 15'),text=data[2])
-               #style_________
+               #style________________________________________________________________________
                name.place(x=100,y=60)
                name_.place(x=170,y=60)
                button_change.place(x=220,y=60)
@@ -395,7 +395,7 @@ def facegram(user):
        text_user=ttk.Label(font=('Century 15'),text="Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play()])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])       
-#_______style____________________________________________________________________________________________
+#______style____________________________________________________________________________________________
        text_user.place(x=270,y=10)
        index.profile_.place(x = 10, y = 10)
        index.music_.place(x = 10, y = 300)
@@ -408,7 +408,7 @@ def home():
        text_title=ttk.Label(font=('Century 20'),text="καλως ηρθες"+"\n"+"στο Facegram")
        main.login_=ttk.Button(main,text="εισοδος  ",command=login)
        main.title("Facegram")
-       #stely____________________________________________________________________________________
+#______stely____________________________________________________________________________________
        text_title.place(x=50,y=100) 
        main.login_.place(x = 290, y = 120)
        main.mainloop()
