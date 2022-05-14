@@ -130,9 +130,14 @@ def login():
            save_profile(name_profile,ps_profile,mail_profile)
 #save porfiles________________________________________________________________________________________________________
        def save_profile(user,pas,mail):
-              f=open("data/profiles.txt","a")
-              f.write(str(user)+"=="+str(pas)+"=="+str(mail) +"\n")    
-              f.closed
+              if user!="":
+                     if pas!="":
+                            if mail !="":
+                                   f=open("data/profiles.txt","a")
+                                   f.write(str(user)+"=="+str(pas)+"=="+str(mail) +"\n")    
+                                   f.closed     
+              else:
+                      return False
 #check user name and pasword ______________________________________________________________________________________           
        def check():
               global name_profile
@@ -219,7 +224,7 @@ def login():
        login()                                            
 #_play music_________________________________________________________________________________________
 music=[ ]
-def music_play ():
+def music_play (user):
        def music_list():
               global music
               for i in range(1,19):
@@ -285,7 +290,7 @@ def music_play ():
               b_next = Button(text = "next",command=next)
               b_back = Button(text = "back",command=back)
               b_random = Button(text = "random",command=random_)
-              b_home = Button(text = "home",command=lambda:[close(2),home()])
+              b_home = Button(text = "facegram",command=lambda:[close(2),facegram(user)])
               #button style
               b_play.place(x = 200,y = 250) 
               b_stop.place(x = 200,y = 280)
@@ -393,7 +398,7 @@ def facegram(user):
        index= Tk()
        index.geometry("450x450")
        text_user=ttk.Label(font=('Century 15'),text="Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
-       index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play()])
+       index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])       
 #______style____________________________________________________________________________________________
        text_user.place(x=270,y=10)
