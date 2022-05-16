@@ -315,9 +315,14 @@ def facegram(user):
                                   fp.write(line)
 #save porfiles________________________________________________________________________________________________________
        def save_profile(user,pas,mail):
-              f=open("data/profiles.txt","a")
-              f.write(str(user)+"=="+str(pas)+"=="+str(mail) +"\n")    
-              f.closed                           
+               if user!="":
+                     if pas!="":
+                            if mail !="":
+                                   f=open("data/profiles.txt","a")
+                                   f.write(str(user)+"=="+str(pas)+"=="+str(mail) +"\n")    
+                                   f.closed     
+               else:
+                      return False                          
        def profile(user):
                def data_change(user):
                        def get_change():
@@ -378,7 +383,7 @@ def facegram(user):
                data=data_user(user)
                #button_______________________________________________________________________________________________
                button_change=ttk.Button(prof,text="αλαγη στα στοιχια σου",command=lambda:[close(7),data_change(data[0])])                                 
-               #text________________________________________________________
+               #text___________________________________________________________________________________________________
                name=ttk.Label(prof,font=('Century 15'),text="ονομα")
                name_=ttk.Label(prof,font=('Century 15'),text=data[0])
                pas=ttk.Label(prof,font=('Century 15'),text="κωδικος")
@@ -399,11 +404,17 @@ def facegram(user):
        index.geometry("450x450")
        text_user=ttk.Label(font=('Century 15'),text="Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
-       index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])       
+
+       index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
+#______imag_________________________________________________________________________________________
+       canvas = Canvas(index, width = 450, height = 200)            
+       img = PhotoImage(file="image/facegram_home.png")      
+       canvas.create_image(10,10, anchor=NW, image=img)
 #______style____________________________________________________________________________________________
-       text_user.place(x=270,y=10)
-       index.profile_.place(x = 10, y = 10)
+       text_user.place(x=270,y=200)
+       index.profile_.place(x = 10, y = 200)
        index.music_.place(x = 10, y = 300)
+       canvas.place(x = 0, y = 0)
        index.title("Facegram")
        index.mainloop()      
 def home():
@@ -413,8 +424,13 @@ def home():
        text_title=ttk.Label(font=('Century 20'),text="καλως ηρθες"+"\n"+"στο Facegram")
        main.login_=ttk.Button(main,text="εισοδος  ",command=login)
        main.title("Facegram")
+#_______image___________________________________________________________________________________
+       canvas = Canvas(main, width = 450, height = 200)            
+       img = PhotoImage(file="image/facegram_logo.png")      
+       canvas.create_image(10,10, anchor=NW, image=img)
 #______stely____________________________________________________________________________________
-       text_title.place(x=50,y=100) 
-       main.login_.place(x = 290, y = 120)
+       text_title.place(x=50,y=300) 
+       main.login_.place(x = 290, y = 320)
+       canvas.place(x = 0, y = 0)
        main.mainloop()
 home()
