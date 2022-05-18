@@ -325,6 +325,7 @@ def facegram(user):
                       return False                          
        def profile(user):
                def data_change(user):
+                      #get input entry___________________
                        def get_change():
                                global name
                                global password
@@ -332,7 +333,8 @@ def facegram(user):
                                name=name_change.get()
                                password=pas_change.get()
                                mail=mail_change.get()
-                       def change(user):
+                      #save the new username and password and mail______________         
+                       def change_save(user):
                              get_change()
                              global name
                              global password
@@ -351,23 +353,25 @@ def facegram(user):
                        change_profile= Tk()
                        change_profile.geometry("450x450")
               #button__________________________________________________________________________
-                       save=ttk.Button(change_profile,text="ολοκληροση",command=lambda:[change(user),close(8),facegram(user)])
+                       save=ttk.Button(change_profile,text="ολοκληροση",command=lambda:[change_save(user),close(8),facegram(user)])
+                       back=ttk.Button(change_profile,text="back",command=lambda:[close(8),facegram(user)])
               #text________________________________________________________________
-                       name=ttk.Label(change_profile,font=('Century 15'),text="ονομα")
-                       pas=ttk.Label(change_profile,font=('Century 15'),text="κωδικος")
-                       mail=ttk.Label(change_profile,font=('Century 15'),text="mail")  
+                       name=ttk.Label(change_profile,font=('Century 15'),text="ονομα:")
+                       pas=ttk.Label(change_profile,font=('Century 15'),text="κωδικος:")
+                       mail=ttk.Label(change_profile,font=('Century 15'),text="mail :")  
               #input______________________________________________________________
                        name_change= ttk.Entry(change_profile,font=('Century 12'))
                        pas_change= ttk.Entry(change_profile,font=('Century 12'))
                        mail_change= ttk.Entry(change_profile,font=('Century 12'))
-              #style______________________________________________________________     
+              #style______________________________________________________________
                        name.place(x=100,y=60)
                        name_change.place(x=170,y=60)
                        pas.place(x=100,y=90)
                        pas_change.place(x=180,y=90)
                        mail.place(x=100,y=120)
                        mail_change.place(x=150,y=120)
-                       save.place(x=100,y=200)
+                       save.place(x=200,y=200)
+                       back.place(x=100,y=200)                            
                        change_profile.mainloop()     
                def data_user(user):
                       f=open("data/profiles.txt","r")
@@ -382,22 +386,26 @@ def facegram(user):
                prof.geometry("450x450")
                data=data_user(user)
                #button_______________________________________________________________________________________________
-               button_change=ttk.Button(prof,text="αλαγη στα στοιχια σου",command=lambda:[close(7),data_change(data[0])])                                 
+               button_change=ttk.Button(prof,text="change",command=lambda:[close(7),data_change(data[0])])
+               back=ttk.Button(prof,text="back",command=lambda:[close(7),facegram(user)])
                #text___________________________________________________________________________________________________
-               name=ttk.Label(prof,font=('Century 15'),text="ονομα")
+               prof_label=ttk.Label(prof,font=('Century 15'),text="Τα στοιχια του λογαριασμου σου")
+               name=ttk.Label(prof,font=('Century 15'),text="ονομα:")
                name_=ttk.Label(prof,font=('Century 15'),text=data[0])
-               pas=ttk.Label(prof,font=('Century 15'),text="κωδικος")
+               pas=ttk.Label(prof,font=('Century 15'),text="κωδικος:")
                pas_=ttk.Label(prof,font=('Century 15'),text=data[1])
-               mail=ttk.Label(prof,font=('Century 15'),text="mail")
+               mail=ttk.Label(prof,font=('Century 15'),text="mail:")
                mail_=ttk.Label(prof,font=('Century 15'),text=data[2])
                #style________________________________________________________________________
+               prof_label.place(x=100,y=10)
                name.place(x=100,y=60)
                name_.place(x=170,y=60)
-               button_change.place(x=220,y=60)
+               button_change.place(x=200,y=200)
                pas.place(x=100,y=90)
                pas_.place(x=180,y=90)
                mail.place(x=100,y=120)
                mail_.place(x=150,y=120)
+               back.place(x=100,y=200)
                prof.mainloop()              
        global index
        index= Tk()
