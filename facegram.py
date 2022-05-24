@@ -120,8 +120,7 @@ def login():
                for i in f:
                       i=i.strip()   
                       cre=i.split('==')
-                      if len(cre
-                             )<2:
+                      if len(cre)<2:
                           continue
                       if cre[0]==user:
                              if cre[1]==pas:      
@@ -409,6 +408,8 @@ def facegram(user):
        index= Tk()
        index.geometry("450x450")
        text_user=ttk.Label(font=('Century 15'),text="Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
+       #button________________________________________________________________________________________
+       exitt=ttk.Button(index,text="exit",command=lambda:[close(6),home()])
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
        #imag_______________________________________________________________________________________
@@ -419,6 +420,7 @@ def facegram(user):
        text_user.place(x=270,y=200)
        index.profile_.place(x = 10, y = 200)
        index.music_.place(x = 10, y = 300)
+       exitt.place(x=30,y=250)
        canvas.place(x = 0, y = 0)
        index.title("Facegram")
        index.mainloop()      
@@ -427,15 +429,18 @@ def home():
        main= Tk()
        main.geometry("450x450")
        text_title=ttk.Label(font=('Century 20'),text="καλως ηρθες"+"\n"+"στο Facegram")
-       main.login_=ttk.Button(main,text="εισοδος  ",command=lambda:[close(1),login()])
        main.title("Facegram")
-#_______image__________________________________________
+       #button_________________________________________________________________________
+       main.login_=ttk.Button(main,text="εισοδος  ",command=lambda:[close(1),login()])
+       quitt=ttk.Button(main,text="quit",command=lambda:[close(1)])      
+       #image__________________________________________
        canvas = Canvas(main, width = 450, height = 200)            
        img = PhotoImage(file="image/facegram_logo.png")      
        canvas.create_image(10,10, anchor=NW, image=img)
-#______stely___________________________________________
+       #stely___________________________________________
        text_title.place(x=50,y=300) 
        main.login_.place(x = 290, y = 320)
+       quitt.place(x = 290, y = 200)
        canvas.place(x = 0, y = 0)
        main.mainloop()
 home()
