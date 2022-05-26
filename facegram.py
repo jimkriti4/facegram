@@ -19,7 +19,7 @@ def login():
                              if cre[1]==pas:      
                                     return True
                f.close() 
-               return False 
+               return False
 #close windos____________________________________________
 def close(i):
               if i==1:
@@ -45,7 +45,10 @@ def close(i):
                   prof.destroy()     
               if i==8:
                   global change_profile
-                  change_profile.destroy()    
+                  change_profile.destroy()
+              if i==9:
+                     global post
+                     post.destroy()
 #login __________________________________________________________________________ 
 def login():
 #delete line for old password user______________________________________________
@@ -314,7 +317,7 @@ def music_play (user):
               root.geometry("450x450")
               root.title("μουσσικη")
               root.mainloop()             
-       music_()
+       music_()    
 def facegram(user):            
        def profile(user):
                def data_change(user):
@@ -327,6 +330,7 @@ def facegram(user):
                                password=pas_change.get()
                                mail=mail_change.get()
                                change_save(user)
+                      #get_change____________________________        
                       #save the new username and password and mail______________         
                        def change_save(user):
                              global name
@@ -345,22 +349,23 @@ def facegram(user):
                                                   dell(a)
                                                   close(8)
                                     a+=1                                         
-                             f.close()                 
+                             f.close()
+                       #change_save__________________________    
                        global change_profile     
                        change_profile= Tk()
                        change_profile.geometry("450x450")
-                    #button_______________________________________________________________________________________
+                       #button____________________________________________________________________________________
                        save=ttk.Button(change_profile,text="ολοκληροση",command=lambda:[get_change(user),login()])
                        back=ttk.Button(change_profile,text="back",command=lambda:[close(8),facegram(user)])
-                    #text_____________________________________________________________
+                       #text___________________________________________________________
                        name=ttk.Label(change_profile,font=('Century 15'),text="ονομα:")
                        pas=ttk.Label(change_profile,font=('Century 15'),text="κωδικος:")
                        mail=ttk.Label(change_profile,font=('Century 15'),text="mail :")  
-                    #input______________________________________________________
+                       #input____________________________________________________
                        name_change= ttk.Entry(change_profile,font=('Century 12'))
                        pas_change= ttk.Entry(change_profile,font=('Century 12'))
                        mail_change= ttk.Entry(change_profile,font=('Century 12'))
-                    #style_________________________
+                       #style_________________________
                        name.place(x=100,y=60)
                        name_change.place(x=170,y=60)
                        pas.place(x=100,y=90)
@@ -369,7 +374,8 @@ def facegram(user):
                        mail_change.place(x=150,y=120)
                        save.place(x=200,y=200)
                        back.place(x=100,y=200)                            
-                       change_profile.mainloop()     
+                       change_profile.mainloop()
+                       #data_change________________
                def data_user(user):
                       f=open("data/profiles.txt","r")
                       for i in f:
@@ -403,25 +409,58 @@ def facegram(user):
                mail.place(x=100,y=120)
                mail_.place(x=150,y=120)
                back.place(x=100,y=200)
-               prof.mainloop()              
+               prof.mainloop()
+               #porfile____________________________
+       #Publication post _______________________________        
+       def Publication(user):
+              def get_text():
+                     global post_text
+                     text_get=post_text.get("1.0","end-1c")
+                     save_post(text_get)
+              def save_post(text):
+                     f=open("data/post.txt","a")
+                     f.write(str(user)+"\n"+str(text)+"\n")    
+                     f.closed        
+              global post
+              post=Tk()
+              post.geometry("450x450")
+              post.title("Δημοσίευση")
+              global post_text
+              #label_______________________________________
+              text=ttk.Label(font=('Century 15'),text="Δημοσίευση")
+              #input_______________________________________
+              post_text=Text(post,height=10, width=30)
+              #bytton____________________________________________________________________
+              back=Button(post,text="back",command=lambda:[close(9),facegram(user)])
+              enter=Button(post,text="sharing",command=lambda:[get_text(),close(9),facegram(user)])
+              #style______________________
+              text.place(x=170,y=0)
+              back.place(x=100,y=200)
+              enter.place(x=270,y=200)
+              post_text.place(x=100,y=30)
+
+              post.mainloop()
+       #facegra_______________________________________________________________________________________        
        global index
        index= Tk()
        index.geometry("450x450")
-       text_user=ttk.Label(font=('Century 15'),text="Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
+       text_user=ttk.Label(font=('Century 15'),text="   Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
        #button________________________________________________________________________________________
        exitt=ttk.Button(index,text="exit",command=lambda:[close(6),home()])
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
+       post=ttk.Button(index,text="Δημοσίευση",command=lambda:[close(6),Publication(user)]) 
        #imag_______________________________________________________________________________________
        canvas = Canvas(index, width = 450, height = 200)            
        img = PhotoImage(file="image/facegram_home.png")      
        canvas.create_image(10,10, anchor=NW, image=img)
        #style_______________________________________________________________________________________
-       text_user.place(x=270,y=200)
+       text_user.place(x=160,y=200)
        index.profile_.place(x = 10, y = 200)
        index.music_.place(x = 10, y = 300)
-       exitt.place(x=30,y=250)
+       exitt.place(x=360,y=200)
        canvas.place(x = 0, y = 0)
+       post.place(x = 300, y = 400)
        index.title("Facegram")
        index.mainloop()      
 def home():
