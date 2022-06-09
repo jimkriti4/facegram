@@ -312,7 +312,7 @@ def music_play (user):
               b_next.place(x = 240, y = 250) 
               b_back.place(x = 160, y = 250)
               b_random.place(x = 280, y = 250)
-              b_home.place(x = 120, y = 250)
+              b_home.place(x =280, y = 280)
               text_title.place(x=170,y=10)              
               root.geometry("450x450")
               root.title("μουσσικη")
@@ -419,7 +419,7 @@ def facegram(user):
                      save_post(text_get)
               def save_post(text):
                      f=open("data/post.txt","a")
-                     f.write(str(user)+"\n"+str(text)+"\n")    
+                     f.write(str(user)+"=="+str(text)+"\n")    
                      f.closed        
               global post
               post=Tk()
@@ -433,34 +433,58 @@ def facegram(user):
               #bytton____________________________________________________________________
               back=Button(post,text="back",command=lambda:[close(9),facegram(user)])
               enter=Button(post,text="sharing",command=lambda:[get_text(),close(9),facegram(user)])
-              #style______________________
+              #style____________________
               text.place(x=170,y=0)
               back.place(x=100,y=200)
               enter.place(x=270,y=200)
               post_text.place(x=100,y=30)
-
               post.mainloop()
-       #facegra_______________________________________________________________________________________        
+             
+       #code_view_text_post_________________
+       def view(i):
+              read_post_list=i.split('==')
+              print(read_post_list)
+              text_post_user=ttk.Label(index,font=('Century 15'),text="ο/η χρητης   "+read_post_list[0])
+              text_user_post=ttk.Label(index,font=('Century 15'),text=read_post_list[1])
+              text_post_user.place(x = 20, y = 320)
+              text_user_post.place(x = 20, y = 350)
+       def file_is_not_null():
+                 p=0
+                 f=open("data/post.txt","r")
+                 while p!="1":
+                        i=f.read()
+                        if i=="":
+                               p=1
+                               return False
+                        else:
+                               view(i)
+                               p=1
+                 f.closed
+       #finish===============================
+       #facegram_______________________________________________________________________________________        
        global index
        index= Tk()
-       index.geometry("450x450")
+       index.geometry("450x550")
        text_user=ttk.Label(font=('Century 15'),text="   Καλως Ηρθες"+"\n"+"|_-_-_|  "+user+"  |_-_-_|")
        #button________________________________________________________________________________________
        exitt=ttk.Button(index,text="exit",command=lambda:[close(6),home()])
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
-       post=ttk.Button(index,text="Δημοσίευση",command=lambda:[close(6),Publication(user)]) 
+       post=ttk.Button(index,text="Δημοσίευση",command=lambda:[close(6),Publication(user)])
+       post_view=ttk.Button(index,text="εμφανιση Δημοσίευση ",command=lambda:[
+              file_is_not_null()]) 
        #imag_______________________________________________________________________________________
        canvas = Canvas(index, width = 450, height = 200)            
        img = PhotoImage(file="image/facegram_home.png")      
        canvas.create_image(10,10, anchor=NW, image=img)
        #style_______________________________________________________________________________________
-       text_user.place(x=160,y=200)
+       text_user.place(x=150,y=200)
        index.profile_.place(x = 10, y = 200)
-       index.music_.place(x = 10, y = 300)
+       index.music_.place(x = 10, y = 230)
        exitt.place(x=360,y=200)
        canvas.place(x = 0, y = 0)
-       post.place(x = 300, y = 400)
+       post.place(x = 360, y = 230)
+       post_view.place(x = 10, y = 260)
        index.title("Facegram")
        index.mainloop()      
 def home():
