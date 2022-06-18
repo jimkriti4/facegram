@@ -103,7 +103,7 @@ def login():
                global mail_
                forg= Tk()
                forg.geometry("450x450")
-               name_label=ttk.Label(forg,font=('Century 11'),text="Ονομα ")
+               name_label=ttk.Label(forg,font=('Century 11'),text="Ονομα ",background="#404040",foreground="cyan")
                new_pas=ttk.Entry(forg,font=('Century 12'))  
                entre=ttk.Button(forg, text="Ολοκληροση", command=lambda:[get(),close(5),login()])
                pas_label=ttk.Label(forg,font=('Century 11'),text="   Νεος"+"\n"+"Κοδικως ",background="#404040",foreground="cyan")
@@ -117,7 +117,7 @@ def login():
                name_forg.place(x = 110, y = 60)              
                back_frog.place(x = 80, y = 200)
                forg.title("Ξεχασες των κοδικω ")
-               frog.configure(bg='#404040')
+               forg.configure(bg='#404040')
                forg.mainloop()
 #login tsek______________________________________________________________________________________
        def id_porfile(user,pas) :
@@ -333,7 +333,7 @@ def facegram(user):
                   label_clock.config(text=string)
                   label_clock.after(1000,time)
               label_clock= ttk.Label(index, font=("DS-DIGI.TTF",20),background="#404040",foreground="cyan")
-              label_clock.place(x=100,y=330) 
+              label_clock.place(x=150,y=250) 
               time()
        def profile(user):
                def data_change(user):
@@ -458,29 +458,27 @@ def facegram(user):
               post_text.place(x=100,y=30)
               post.configure(bg='#404040')
               post.mainloop()
-             
        #code_view_text_post_________________
-       def view(i):
-              read_post_list=i.split('==')
-              print(read_post_list)
-              text_post_user=ttk.Label(index,font=('Century 15'),text="ο/η χρητης   "+read_post_list[0],background="#404040",foreground="cyan")
-              text_user_post=ttk.Label(index,font=('Century 15'),text=read_post_list[1],background="#404040",foreground="cyan")
-              text_post_user.place(x = 20, y = 320)
-              text_user_post.place(x = 20, y = 350)
-       def file_is_not_null():
-                 p=0
+      #code_view_text_post==========================================================       
+       def view():
+                 fal=0
                  f=open("data/post.txt","r")
-                 while p!="1":
-                        i=f.read()
+                 while fal==0:
+                        i=f.readline()
                         if i=="":
-                               p=1
-                               return False
+                               fal=1
+                               continue
                         else:
-                               view(i)
-                               p=1
-                 f.closed
+                               read_post_list=i.split('==')
+                               text_post_user=ttk.Label(index,font=('Century 15'),text=read_post_list[0],background="#404040",foreground="cyan")
+                               text_user_post=ttk.Label(index,font=('Century 15'),text=read_post_list[1],background="#404040",foreground="cyan")
+                               text_user_post.pack(side = BOTTOM )       
+                               text_post_user.pack(side = BOTTOM )
+                                   
+
+        
        #finish===============================
-       #facegram_______________________________________________________________________________________        
+       #facegram________________________________________________________________________________________________________________________________________        
        global index
        index= Tk()
        index.geometry("450x550")
@@ -491,14 +489,14 @@ def facegram(user):
        index.music_=ttk.Button(index,text="παιξε μουσικη",command=lambda:[close(6),music_play(user)])
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
        post=ttk.Button(index,text="Δημοσίευση",command=lambda:[close(6),Publication(user)])
-       post_view=ttk.Button(index,text="εμφανιση Δημοσίευση ",command=lambda:[file_is_not_null()])
-       #clock_______________________________________________________________________________________
+       post_view=ttk.Button(index,text="εμφανιση Δημοσίευση ",command=lambda:[view()])
+       #clock_____________________________________
        clock()
-       #imag_______________________________________________________________________________________
+       #imag______________________________________________
        canvas = Canvas(index, width = 450, height = 200)            
        img = PhotoImage(file="image/facegram_home.png")      
        canvas.create_image(10,10, anchor=NW, image=img)
-       #style_______________________________________________________________________________________
+       #style_______________________________________
        text_user.place(x=150,y=200)
        index.profile_.place(x = 10, y = 200)
        index.music_.place(x = 10, y = 230)
@@ -522,12 +520,12 @@ def home():
        canvas = Canvas(main, width = 400, height = 150)            
        img = PhotoImage(file="image/facegram_logo.png")      
        canvas.create_image(0,0, anchor=NW, image=img)
-       #stely___________________________________________
+       #stely______________________________
        text_title.place(x=50,y=300) 
        main.login_.place(x = 290, y = 320)
        quitt.place(x = 290, y = 200)
        canvas.place(x = 20, y = 0)
-       #color___
+       #color_____________________________
        main.configure(bg='#404040')
        main.mainloop()      
 home()
