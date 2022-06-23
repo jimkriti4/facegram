@@ -65,7 +65,7 @@ def login():
                                   fp.write(line)  
 #frpgot pasword __________________________________________________________    
        def forgot():   
-               def id_true(user,pas):
+               def id_true(user,pas,mail):
                      def save_frogot():
                             global dell
                             fout = open("data/profiles.txt", "a")
@@ -74,20 +74,25 @@ def login():
                      f=open("data/profiles.txt","r")
                      replacement = ""
                      a=0
+                     loop=0
                      for i in f:
                              i=i.strip()   
                              cre=i.split('==')
                              if len(cre)<2:
                                  continue
-                             if cre[0]==user:      
+                             if cre[0]==user and cre[2]==mail and loop==0:
+                                    loop+=1
                                     dell(a)
                                     save_profile(user,pas,mail)
+                                    close(5)
+                                    login()
                              a+=1                             
-                     f.close()      
+                     f.close()
+              #get_entry_________________________       
                def get():
                        global neme_frog
                        global new_pas
-                       global mail_
+                       global mail_forg
                        #username_______________
                        name_get=name_forg.get()
                        neme_frog=name_get
@@ -95,30 +100,43 @@ def login():
                        pas_get=new_pas.get()
                        new_pas=pas_get
                        #mali________________________
-                       mail_get=mail_.get()
+                       mail_get=mail_forg.get()
                        mail=mail_get
+                       #camand______________________
                        id_true(name_get,new_pas,mail)
                close(3)
                global forg
                global new_pas
-               global mail_
+               global mail_forg
                forg= Tk()
                forg.geometry("450x450")
-               name_label=ttk.Label(forg,font=('Century 11'),text="Ονομα ",background=backgreund
-                                    ,foreground=text_color)
-               new_pas=ttk.Entry(forg,font=('Century 12'))  
-               entre=ttk.Button(forg, text="Ολοκληροση", command=lambda:[get(),close(5),login()])
-               pas_label=ttk.Label(forg,font=('Century 11'),text="   Νεος"+"\n"+"Κοδικως ",background=backgreund
-                                   ,foreground=text_color)
-               back_frog=ttk.Button(forg, text="home", command=lambda:[close(5),home()])
-               name_forg=ttk.Entry(forg,font=('Century 12'))     
-#style_______________________________________________________________________________________
-               pas_label.place(x = 30, y =85 )
-               new_pas.place(x = 110, y =100 )     
+          #LABEL_______________________________________________________________________________________
+               name_label=ttk.Label(forg,font=('Century 11'),text="Ονομα "
+                                    ,background=backgreund,foreground=text_color)
+               pas_label=ttk.Label(forg,font=('Century 11'),text="   Νεος"+"\n"+"Κοδικως "
+                                   ,background=backgreund,foreground=text_color)
+               mail_label=ttk.Label(forg,font=('Century 11'),text="mail "
+                                   ,background=backgreund,foreground=text_color)
+           #BUTTON__________________________________________________________________________
+               home_frog=ttk.Button(forg, text="home", command=lambda:[close(5),home()])
+               entre=ttk.Button(forg, text="Ολοκληροση", command=lambda:[get()])
+           #ENTRY______________________________________
+               name_forg=ttk.Entry(forg,font=('Century 12'))
+               new_pas=ttk.Entry(forg,font=('Century 12'))
+               mail_forg=ttk.Entry(forg,font=('Century 12')) 
+     #style_______________________________________________________________________________________
+            #entry_style________________________     
+               name_forg.place(x=110,y=60)
+               new_pas.place(x=110,y=100)
+               mail_forg.place(x=110,y=140)
+            #style_label_______________________
+               name_label.place(x=40,y=60)
+               pas_label.place(x=40, y=85 )
+               mail_label.place(x=50,y=145)
+            #button_style_______________________
                entre.place(x = 270, y = 200)
-               name_label.place(x = 30, y = 60)
-               name_forg.place(x = 110, y = 60)              
-               back_frog.place(x = 80, y = 200)
+               home_frog.place(x = 100, y = 200)
+            #windus_____________________________
                forg.title("Ξεχασες των κοδικω ")
                forg.configure(bg=backgreund)
                forg.mainloop()
@@ -469,7 +487,8 @@ def facegram(user):
               #label_______________________________________
               text=ttk.Label(font=('Century 15'),text="Δημοσίευση",background=backgreund,foreground=text_color)
               #input_______________________________________
-              post_text=Text(post,height=10, width=30)
+              post_text=Text(post,height=10, width=30,background=backgreund,foreground=text_color)
+              
               #bytton____________________________________________________________________
               back=Button(post,text="back",command=lambda:[close(9),facegram(user)])
               enter=Button(post,text="sharing",command=lambda:[get_text(),close(9),facegram(user)])
@@ -485,7 +504,7 @@ def facegram(user):
        def view():
               scrollbar = tk.Scrollbar(index)
               scrollbar.place(x = 430, y = 320)
-              listbox = tk.Listbox(index,font=('Century 14'),height=10,width=35)
+              listbox = tk.Listbox(index,font=('Century 14'),height=10,width=35,background=backgreund,foreground=text_color)
               f=open("data/post.txt","r")
               for i in f:
                   text=i.split("==")
@@ -540,9 +559,9 @@ def home():
        img = PhotoImage(file="image/facegram_logo.png")      
        canvas.create_image(0,0, anchor=NW, image=img)
        #stely______________________________
-       text_title.place(x=50,y=300) 
-       main.login_.place(x = 290, y = 320)
-       quitt.place(x = 290, y = 200)
+       text_title.place(x=50,y=200) 
+       main.login_.place(x = 348, y = 220)
+       quitt.place(x = 348, y = 150)
        canvas.place(x = 20, y = 0)
        #color_____________________________
        main.configure(bg=backgreund)
