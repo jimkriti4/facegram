@@ -6,6 +6,7 @@ def windus_instal(x):
         os.system('py -m pip --version')
         os.system('py -m ensurepip --default-pip')
         os.system('py -m pip install --upgrade pip setuptools wheel')
+        os.system('py -m pip install pygame')
 x=input("εχεεις κατεβαση το pip(yes/no)")
 windus_instal(x)
  

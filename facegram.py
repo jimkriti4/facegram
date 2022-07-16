@@ -51,6 +51,10 @@ def close(i):
               if i==9:
                      global post
                      post.destroy()
+              if i==10:
+                     global game_win
+                     game_win.destroy()
+                     
 #login __________________________________________________________________________ 
 def login():
 #delete line for old password user______________________________________________
@@ -171,13 +175,13 @@ def login():
        def save_profile(user,pas,mail):
               if user!="":
                      if pas!="":
-                            if mail !="":
+                            if mail!="":
                                    f=open("data/profiles.txt","a")
-                                   f.write(str(user)+"=="+str(pas)+"=="+str(mail) +"\n")    
+                                   f.write(str(user)+"=="+str(pas)+"=="+str(mail)+"\n")    
                                    f.closed
                                    return True
-              else:
-                      return False
+                     else:
+                            return False
 #check user name and pasword __________________________________________________________________           
        def check():
               global name_profile
@@ -328,6 +332,7 @@ def music_play (user):
               viow_song()
        def viow_song():
            global key
+
            #text____________________________________________
            text_song=ttk.Label(root,font=('Century 15'),text="Tο Tραγουδι Eιναι:"+str(key)+".mp3",
                                background="#404040",foreground=text_color)
@@ -337,15 +342,20 @@ def music_play (user):
               global root
               key=0
               music_list()
-              root = Tk()
+              root=Tk()
+              play_ = PhotoImage(file = r"image/play.png")
+              stop_ = PhotoImage(file = r"image/stop.png")
+              next_l_ = PhotoImage(file = r"image/next_left.png")
+              next_r_ = PhotoImage(file = r"image/next_rite.png")
+              random = PhotoImage(file = r"image/random.png") 
               #text__________________________________________________________________________________
               text_title=ttk.Label(font=('Century 20'),text="μουσικη ",background=backgreund,foreground=text_color)
               #button_____________________________________
-              b_play = Button(text = "play",command=play)
-              b_stop = Button(text = "stop",command=stop)
-              b_next = Button(text = "next",command=next)
-              b_back = Button(text = "back",command=back)
-              b_random = Button(text = "random",command=random_)
+              b_play = Button(text = "play",image=play_,command=play)
+              b_stop = Button(text = "stop",image=stop_,command=stop)
+              b_next = Button(text = "next",image=next_r_,command=next)
+              b_back = Button(text = "back",image=next_l_,command=back)
+              b_random = Button(text = "random",image=random ,command=random_)
               b_home = Button(text = "facegram",command=lambda:[close(2),facegram(user)])
               #button style___________________
               b_play.place(x = 200,y = 250) 
@@ -525,24 +535,40 @@ def facegram(user):
        index.profile_=ttk.Button(index,text="ο λογαριασμο σου",command=lambda:[close(6),profile(user)])
        post=ttk.Button(index,text="Δημοσίευση",command=lambda:[close(6),Publication(user)])
        post_view=ttk.Button(index,text="εμφανιση Δημοσίευση ",command=lambda:[view()])
-       #clock_____________________________________
+       index.game=ttk.Button(index,text="παιχνιδια ",command=lambda:[close(6),game(user)])
+       #clock__
        clock()
        #imag____________________________________________
-       canvas = Canvas(index, width = 450, height = 200)            
-       img = PhotoImage(file="image/facegram_home.png")      
-       canvas.create_image(10,10, anchor=NW, image=img)
-       #style_______________________________________
+       canvas = Canvas(index, width = 400, height = 150)            
+       img = PhotoImage(file="image/facegram_logo.png")      
+       canvas.create_image(0,0, anchor=NW, image=img)
+       #style______________________________
        text_user.place(x=150,y=200)
        index.profile_.place(x = 10, y = 200)
        index.music_.place(x = 10, y = 230)
        exitt.place(x=360,y=200)
-       canvas.place(x = 0, y = 0)
+       canvas.place(x = 20, y = 0)
        post.place(x = 360, y = 230)
+       index.game.place(x = 360, y = 260)
        post_view.place(x = 10, y = 260)
        index.title("Facegram")
        index.configure(bg=backgreund)
        index.mainloop()
        #facegram=======================================================================================================
+#game_________________________________________________________________________________________________________________
+def game(user):
+       global game_win
+       game_win= Tk()
+       game_win.geometry("450x450")
+     #button_________________________________________________________________________
+       back=ttk.Button(game_win,text="back",command=lambda:[close(10),facegram(user)])
+    #style_________________________
+       back.place(x = 360, y = 260)
+    #winduws___________________________
+       game_win.configure(bg=backgreund)
+       game_win.title("games")
+       game_win.mainloop()
+#game=================================================================================================================
 #home_page____________________________________________________________________________________________________________       
 def home():
        global main
@@ -551,8 +577,10 @@ def home():
        text_title=ttk.Label(font=('Century 20'),text="καλως ηρθες"+"\n"+"στο Facegram",background=backgreund
                             ,foreground=text_color)
        main.title("Facegram")
+       #photo_login_button______________________________________________
+       login_button = PhotoImage(file = r"image/login_button.png") 
        #button_________________________________________________________________________
-       main.login_=ttk.Button(main,text="εισοδος  ",command=lambda:[close(1),login()])
+       main.login_=ttk.Button(main,image=login_button,command=lambda:[close(1),login()])
        quitt=ttk.Button(main,text="quit",command=lambda:[close(1)])      
        #image__________________________________________
        canvas = Canvas(main, width = 400, height = 150)            
@@ -560,13 +588,14 @@ def home():
        canvas.create_image(0,0, anchor=NW, image=img)
        #stely______________________________
        text_title.place(x=50,y=200) 
-       main.login_.place(x = 348, y = 220)
-       quitt.place(x = 348, y = 150)
-       canvas.place(x = 20, y = 0)
+       main.login_.place(x=300,y=220)
+       quitt.place(x=348,y=150)
+       canvas.place(x=20,y=0)
        #color_____________________________
        main.configure(bg=backgreund)
+       main.title("home")
        main.mainloop()
 #color_theme_____________
 backgreund="#404040"
-text_color="cyan"
+text_color="#00ffff"
 home()
